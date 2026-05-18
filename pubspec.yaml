@@ -43,6 +43,7 @@ dependencies:
   go_router: ^17.2.3
   equatable: ^2.0.8
   fpdart: ^1.2.0
+  flutter_flavorizr: ^2.4.2
   flutter_localizations:
     sdk: flutter
 
@@ -61,7 +62,43 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
 
+  flavors:
+
+    dev:
+      app:
+        name: "(Stag) Boilerplate"
+
+      android:
+        applicationId: "com.example.boilerplate.stag"
+
+      ios:
+        bundleId: "com.example.boilerplate.stag"
+
+    uat:
+      app:
+        name: "(UAT) Boilerplate"
+
+      android:
+        applicationId: "com.example.boilerplate.uat"
+
+      ios:
+        bundleId: "com.example.boilerplate.uat"
+
+    prod:
+      app:
+        name: "(Production) Boilerplate"
+
+      android:
+        applicationId: "com.example.boilerplate.prod"
+
+      ios:
+        bundleId: "com.example.boilerplate.prod"
+        
 # The following section is specific to Flutter packages.
 flutter:
 
