@@ -1,0 +1,13 @@
+{
+  "@@locale": "ja",
+
+  "appName": "ボイラープレート",
+
+  "login": "ログイン",
+
+  "email": "メール",
+
+  "password": "パスワード",
+
+  "welcome": "ようこそ"
+}

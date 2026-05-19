@@ -1,0 +1,13 @@
+{
+  "@@locale": "en",
+
+  "appName": "Boilerplate",
+
+  "login": "Login",
+
+  "email": "Email",
+
+  "password": "Password",
+
+  "welcome": "Welcome"
+}

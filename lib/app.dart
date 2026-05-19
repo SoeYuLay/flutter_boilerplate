@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/app/localization/app_localizations.dart';
+import 'package:flutter_boilerplate/app/localization/l10n.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app/config/flavor_config.dart';
 import 'app/router/app_router.dart';
@@ -10,6 +13,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+
+      supportedLocales: L10n.supportedLocales,
       title: _title,
       theme: ThemeData(primarySwatch: Colors.blue),
       routerConfig: router,
