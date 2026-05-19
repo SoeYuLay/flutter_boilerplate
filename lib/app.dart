@@ -1,25 +1,31 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'flavors.dart';
-import 'pages/my_home_page.dart';
+import 'app/config/flavor_config.dart';
+import 'app/router/app_router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: F.title,
+    return MaterialApp.router(
+      title: _title,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: _flavorBanner(child: MyHomePage(), show: kDebugMode),
+      routerConfig: router,
+      builder: (context, child) {
+        return _flavorBanner(
+          child: child ?? const SizedBox.shrink(),
+          show: kDebugMode,
+        );
+      },
     );
   }
 
   Widget _flavorBanner({required Widget child, bool show = true}) => show
       ? Banner(
           location: BannerLocation.topStart,
-          message: F.name,
+          message: _name,
           color: Colors.green.withAlpha(150),
           textStyle: TextStyle(
             fontWeight: FontWeight.w700,
@@ -30,4 +36,17 @@ class App extends StatelessWidget {
           child: child,
         )
       : Container(child: child);
+
+  String get _name => FlavorConfig.instance.flavor.name;
+
+  String get _title {
+    switch (FlavorConfig.instance.flavor) {
+      case Flavor.dev:
+        return 'Boilerplate Dev';
+      case Flavor.uat:
+        return 'Boilerplate UAT';
+      case Flavor.prod:
+        return 'Boilerplate Production';
+    }
+  }
 }

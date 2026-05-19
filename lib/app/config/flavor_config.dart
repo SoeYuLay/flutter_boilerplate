@@ -1,5 +1,5 @@
 enum Flavor {
-  stag,
+  dev,
   uat,
   prod,
 }
@@ -30,10 +30,13 @@ class FlavorConfig {
   }
 
   static FlavorConfig get instance {
+    if(_instance == null){
+      throw Exception('FlavorConfig is not initialized');
+    }
     return _instance!;
   }
 
-  bool get isStag => flavor == Flavor.stag;
+  bool get isDev => flavor == Flavor.dev;
   bool get isUat => flavor == Flavor.uat;
   bool get isProd => flavor == Flavor.prod;
 }

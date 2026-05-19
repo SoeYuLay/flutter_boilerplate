@@ -7,13 +7,13 @@
 
 
         {
-      "name": "Boilerplate (Stag)",
+      "name": "Boilerplate (Dev)",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_stag.dart",
+      "program": "lib/main_dev.dart",
       "args": [
         "--flavor",
-        "stag"
+        "dev"
       ]
     },
 

@@ -1,14 +1,13 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_boilerplate/app/config/flavor_config.dart';
+import 'package:flutter_boilerplate/core/di/injection.dart';
 
 import 'app.dart';
-import 'flavors.dart';
 
-void main() {
-  F.appFlavor = Flavor.values.firstWhere(
-    (element) => element.name == appFlavor,
-  );
-
+void mainCommon({required Flavor flavor, required String baseUrl}) async{
+  WidgetsFlutterBinding.ensureInitialized();
+  FlavorConfig(flavor: flavor, baseUrl: baseUrl);
+  await initDependencies();
   runApp(const App());
 }
