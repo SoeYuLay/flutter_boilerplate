@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/app/localization/app_localizations.dart';
 import 'package:flutter_boilerplate/app/localization/l10n.dart';
-import 'package:flutter_boilerplate/features/map/choose_location_screen.dart';
+import 'package:flutter_boilerplate/features/map/presentation/pages/choose_location_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app/config/flavor_config.dart';
