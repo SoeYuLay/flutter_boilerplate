@@ -1,10 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/app/localization/app_localizations.dart';
 import 'package:flutter_boilerplate/app/localization/l10n.dart';
-import 'package:flutter_boilerplate/features/map/presentation/pages/choose_location_screen.dart';
+import 'package:flutter_boilerplate/features/map/presentation/bloc/current_location/current_location_bloc.dart';
+import 'package:flutter_boilerplate/features/map/presentation/bloc/current_location/current_location_event.dart';
+import 'package:flutter_boilerplate/features/map/presentation/pages/choose_location_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+import 'package:flutter_boilerplate/core/di/injection.dart';
 import 'app/config/flavor_config.dart';
 import 'app/router/app_router.dart';
 
@@ -13,25 +16,30 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CurrentLocationBloc>(create: (_)=> sl()..add(GetCurrentLocation()))
       ],
-
-      supportedLocales: L10n.supportedLocales,
-      title: _title,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      // routerConfig: router,
-      home: ChooseLocationScreen()
-      // builder: (context, child) {
-      //   return _flavorBanner(
-      //     child: child ?? const SizedBox.shrink(),
-      //     show: kDebugMode,
-      //   );
-      // },
+      child: MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+      
+        supportedLocales: L10n.supportedLocales,
+        title: _title,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        // routerConfig: router,
+        home: ChooseLocationPage()
+        // builder: (context, child) {
+        //   return _flavorBanner(
+        //     child: child ?? const SizedBox.shrink(),
+        //     show: kDebugMode,
+        //   );
+        // },
+      ),
     );
   }
 

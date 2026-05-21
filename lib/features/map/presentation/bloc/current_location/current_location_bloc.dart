@@ -23,7 +23,7 @@ class CurrentLocationBloc extends Bloc<CurrentLocationEvent, CurrentLocationStat
       emit(CurrentLocationState.loaded(currentLocationData));
 
     }catch (e){
-      emit(CurrentLocationState.error( e.toString()));
+      emit(CurrentLocationState.error(e.toString()));
     }
   }
 }

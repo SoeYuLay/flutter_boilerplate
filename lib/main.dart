@@ -11,3 +11,4 @@ void mainCommon({required Flavor flavor, required String baseUrl}) async{
   await initDependencies();
   runApp(const App());
 }
+
