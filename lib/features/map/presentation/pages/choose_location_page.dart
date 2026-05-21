@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/features/map/presentation/bloc/current_location/current_location_bloc.dart';
 import 'package:flutter_boilerplate/features/map/presentation/bloc/current_location/current_location_state.dart';
 import 'package:flutter_boilerplate/features/map/presentation/widgets/location_marker.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
@@ -37,15 +38,6 @@ class ChooseLocationPageState extends State<ChooseLocationPage> {
           if (state is CurrentLocationLoaded) {
             _latLng = LatLng(state.currentLocation.latitude, state.currentLocation.longitude);
 
-            // final controller = await _controller.future;
-
-            // controller.animateCamera(CameraUpdate.newCameraPosition(
-            //   CameraPosition(
-            //     target: latLng,
-            //     zoom: 20
-            //   )
-            // )
-            // );
             return SafeArea(
               child: Stack(
                 alignment: Alignment.center,
@@ -61,11 +53,7 @@ class ChooseLocationPageState extends State<ChooseLocationPage> {
                   },
                   
                   onCameraIdle: () {
-                      print(
-                        'Selected Location: '
-                        '${_latLng.latitude}, '
-                        '${_latLng.longitude}',
-                      );
+                    _getAddressFromLatLng();
                     },
                 ),
                 
@@ -80,6 +68,28 @@ class ChooseLocationPageState extends State<ChooseLocationPage> {
         
       ),
     );
+  }
+
+  Future<void> _getAddressFromLatLng() async {
+    try{
+      List<Placemark> placemarks = await placemarkFromCoordinates(_latLng.latitude, _latLng.longitude);
+
+      final placemark = placemarks.first;
+
+      final address =
+        'Address: '
+        '${placemark.name}, '
+        '${placemark.street}, '
+        '${placemark.isoCountryCode}, '
+        '${placemark.postalCode}, '
+        '${placemark.locality}, '
+        '${placemark.country}';
+
+      print(address);
+
+    } catch (e) {
+      print (e);
+    }   
   }
 
 }
