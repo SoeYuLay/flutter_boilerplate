@@ -1,56 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LocationMarker extends StatelessWidget {
-  const LocationMarker({super.key});
+  final bool pinDragging;
+
+  const LocationMarker({
+    super.key,
+    required this.pinDragging,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.amber
-              ),
+    return SizedBox(
+      width: 70,
+      height: 70,
+      child: Stack(
+        // alignment: Alignment.bottomCenter,
+        children: [
+      
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 100),
+            curve: Curves.easeOut,
+            transform: Matrix4.translationValues(
+              0,
+              pinDragging ? -12 : 0,
+              0,
             ),
-            Container(
-              width: 15,
-              height: 15,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white
-              ),
+            child: SvgPicture.asset(
+              'assets/imgs/locationPin.svg',
             ),
-          ],
-        ),
-        Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            Container(
-              width: 5,
-              height: 13,
-              decoration: BoxDecoration(
-                color: Colors.black
-              ),
+          ),
+      
+          pinDragging ?
+          Positioned(
+            top: 58,
+            left: 16,
+            child: SvgPicture.asset(
+              'assets/imgs/locationPinShadow.svg',
             ),
-            Container(
-              width: 8,
-              height: 5,
-              decoration: ShapeDecoration(
-                color: Colors.black,
-                shape: OvalBorder()
-              ),
-            ),
-          ],
-        )
-        
-      ],
+          ) : SizedBox(),
+        ],
+      ),
     );
   }
 }
