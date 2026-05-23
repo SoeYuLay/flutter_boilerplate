@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/features/map/data/data_sources/remote/models/current_location/current_location_Dto.dart';
+import 'package:flutter_boilerplate/features/map/data/models/current_location/current_location_Dto.dart';
 import 'package:flutter_boilerplate/features/map/data/mapper/current_location_mapper.dart';
 import 'package:flutter_boilerplate/features/map/domain/entity/current_location/current_location_entity.dart';
 import 'package:flutter_boilerplate/features/map/domain/repository/current_location_repo.dart';

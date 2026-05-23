@@ -1,15 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/app/localization/app_localizations.dart';
 import 'package:flutter_boilerplate/app/localization/l10n.dart';
 import 'package:flutter_boilerplate/features/map/presentation/bloc/current_location/current_location_bloc.dart';
 import 'package:flutter_boilerplate/features/map/presentation/bloc/current_location/current_location_event.dart';
+import 'package:flutter_boilerplate/features/map/presentation/bloc/google_map_geocoding/google_map_geocoding_bloc.dart';
+import 'package:flutter_boilerplate/features/map/presentation/bloc/google_map_geocoding/google_map_geocoding_event.dart';
 import 'package:flutter_boilerplate/features/map/presentation/pages/choose_location_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_boilerplate/core/di/injection.dart';
 import 'app/config/flavor_config.dart';
-import 'app/router/app_router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -18,7 +18,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<CurrentLocationBloc>(create: (_)=> sl()..add(GetCurrentLocation()))
+        BlocProvider<CurrentLocationBloc>(create: (_)=> sl()..add(GetCurrentLocation())),
+        BlocProvider<GoogleMapGeocodingBloc>(create: (_)=> sl<GoogleMapGeocodingBloc>())
       ],
       child: MaterialApp(
         localizationsDelegates: const [
@@ -32,31 +33,11 @@ class App extends StatelessWidget {
         title: _title,
         theme: ThemeData(primarySwatch: Colors.blue),
         // routerConfig: router,
-        home: ChooseLocationPage()
-        // builder: (context, child) {
-        //   return _flavorBanner(
-        //     child: child ?? const SizedBox.shrink(),
-        //     show: kDebugMode,
-        //   );
-        // },
+        home: ChooseLocationPage(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
-
-  Widget _flavorBanner({required Widget child, bool show = true}) => show
-      ? Banner(
-          location: BannerLocation.topStart,
-          message: _name,
-          color: Colors.green.withAlpha(150),
-          textStyle: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 12.0,
-            letterSpacing: 1.0,
-          ),
-          textDirection: TextDirection.ltr,
-          child: child,
-        )
-      : Container(child: child);
 
   String get _name => FlavorConfig.instance.flavor.name;
 

@@ -7,7 +7,7 @@ import 'package:flutter_boilerplate/features/map/presentation/bloc/current_locat
 class CurrentLocationBloc extends Bloc<CurrentLocationEvent, CurrentLocationState>{
   final GetCurrentLocationUseCase _getCurrentLocationUseCase;
 
-  CurrentLocationBloc(this._getCurrentLocationUseCase) : super(const CurrentLocationState.loading()){
+  CurrentLocationBloc(this._getCurrentLocationUseCase) : super(const CurrentLocationLoading()){
     on<GetCurrentLocation>(onGetCurrentLocation);
     add(const GetCurrentLocation());
   }
@@ -16,14 +16,14 @@ class CurrentLocationBloc extends Bloc<CurrentLocationEvent, CurrentLocationStat
     GetCurrentLocation event,
     Emitter<CurrentLocationState> emit
   ) async {
-    emit(const CurrentLocationState.loading());
+    emit(const CurrentLocationLoading());
 
     try{
       final CurrentLocationEntity currentLocationData = await _getCurrentLocationUseCase.call(null);
-      emit(CurrentLocationState.loaded(currentLocationData));
+      emit(CurrentLocationLoaded(currentLocationData));
 
     }catch (e){
-      emit(CurrentLocationState.error(e.toString()));
+      emit(CurrentLocationError(e.toString()));
     }
   }
 }
