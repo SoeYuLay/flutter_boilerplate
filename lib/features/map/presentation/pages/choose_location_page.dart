@@ -5,7 +5,6 @@ import 'package:flutter_boilerplate/features/map/presentation/bloc/current_locat
 import 'package:flutter_boilerplate/features/map/presentation/bloc/current_location/current_location_state.dart';
 import 'package:flutter_boilerplate/features/map/presentation/bloc/google_map_geocoding/google_map_geocoding_bloc.dart';
 import 'package:flutter_boilerplate/features/map/presentation/bloc/google_map_geocoding/google_map_geocoding_event.dart';
-import 'package:flutter_boilerplate/features/map/presentation/bloc/google_map_geocoding/google_map_geocoding_state.dart';
 import 'package:flutter_boilerplate/features/map/presentation/widgets/location_marker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
